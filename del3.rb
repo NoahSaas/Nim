@@ -20,10 +20,24 @@ def game()
         name_2 = "Dator"
     end
 
+    puts "Hur många högar vill du spela med? (3-7)"
+    heaps = gets.chomp.to_i
+    while heaps < 3 || heaps > 7
+        puts "Välj mellan 3 till 7 högar"
+        heaps = gets.chomp.to_i
+    end
+
     answer = nil
 
     while answer != "n"
-        sticks = rand(11...17)
+        lowest_heap = heaps * 2 - 1
+        sticks = [lowest_heap]
+        
+        i = 1
+        while i < heaps
+            sticks.append(lowest_heap - 2 * i)
+            i += 1
+        end
 
         if rand(1...2) == 1
             starting_player = name_1
@@ -32,9 +46,9 @@ def game()
         end
 
         if opponent == "s"
-            pvp(sticks, name_1, name_2, starting_player)
+            pvp(sticks, heaps, name_1, name_2, starting_player)
         else
-            pve(sticks, name_1, name_2, starting_player)
+            pve(sticks, heaps, name_1, name_2, starting_player)
         end
             
             
@@ -48,20 +62,30 @@ def game()
 end
 
 
-def pvp(sticks, name_1, name_2, starting_player)
-    while sticks > 0
+def pvp(sticks, heaps, name_1, name_2, starting_player)
+    while heaps > 0
         puts "#{starting_player}:s tur"
 
-        puts "Det finns #{sticks}st pinnar kvar, hur många vill du ta bort (1-3)?:"
+        puts "Såhär ser högarna ut: #{sticks}"
+        puts "Från vilken hög vill du ta bort 1-#{heaps}?:"
+        heap_to_remove = gets.chomp.to_i 
+
+        while heap_to_remove > heaps || heap_to_remove < 1
+            puts "Det finns #{heaps}st högar kvar, från vilken hög vill du ta bort 1-#{heaps}?:"
+            puts "Det finns bara #{heaps} antal högar, du måste ta bort från en av dem"
+            heap_to_remove = gets.chomp.to_i
+        end
+        
+        puts "Hur många pinnar vill du ta bort ur högen? (1-3)"
         sticks_to_remove = gets.chomp.to_i
 
         while sticks_to_remove > 3 || sticks_to_remove < 1
-            puts "Det finns #{sticks}st pinnar kvar, hur många vill du ta bort (1-3)?:"
+            puts "Det finns #{sticks[heap_to_remove]}st pinnar kvar, hur många vill du ta bort (1-3)?:"
             puts "Fel antal pinnar. Man måste ta bort ett ett antal mellan 1-3."
             sticks_to_remove = gets.chomp.to_i
         end
 
-        sticks -= sticks_to_remove
+        sticks[heap_to_remove - 1] -= sticks_to_remove
 
         if starting_player == name_1
             starting_player = name_2
