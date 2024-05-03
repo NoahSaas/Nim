@@ -1,19 +1,29 @@
-puts "Hur många högar vill du spela med? (3-7)"
-heaps = gets.chomp.to_i
+#Beskrivning: En funktion som tar in en array med tal som argument och returner medelvärdet av talen.
+#Argument 1: list - Array, en lista som innehållr olika tal som används för att räkna ut medelvärdet.
+#Return: avg - returnerar en float/int som berättar vad medelvärdet på alla tal i listan var.
 
-while heaps < 3 || heaps > 7
-    puts "Välj mellan 3 till 7 högar"
-    heaps = gets.chomp.to_i
+#Exempel1: average([1,2,3,4]) => #10
+#Exempel2: average([1, -1, 2, 3]) => #1.25
+#Exempel3: average([0, -1, -64, 13]) => #-13.0
+#Exempel4: average([nil, -1, -64, 13]) => #"Invalid data in array"
+#Exempel5: average([2, -1, -64, 13, "stiririr"]) => #"Invalid data in array"
+#Exempel5: average([2, -1, -64, 13, "stiririr"]) => #"Invalid data in array"
+#Exempel5: average([2, -1, -64, 13, [1, 2, 3]]) => #"Invalid data in array"
+#Exempel5: average([2, -1, -64, 13, ""]) => #"Invalid data in array"
+
+
+#By: Noah SB
+#Date: 2024-04-26
+
+
+def average(list)
+    for i in 0..list.length - 1
+        if list[i].class != Float && list[i].class != Integer
+            return "Invalid data in array"
+        end
+    end
+    
+    avg = list.sum/list.length.to_f
+
+    return avg
 end
-
-
-lowest_heap = heaps * 2 - 1
-sticks = [lowest_heap]
-
-i = 1
-while i < heaps
-    sticks.append(lowest_heap - 2 * i)
-    i += 1
-end
-
-print(sticks)
