@@ -18,6 +18,9 @@ def game()
 
     puts "Vill du spela mot en dator eller en annan spelare, Skriv in dator eller spelare (D/S)"
 
+    # Ett easter egg är om man skriver gud som spelare så förlorar man och gud vinner direkt
+    # Ett annat är att om man skriver in Dator som namn på spelaren när man kör mot datorn, så kör datorn mot datorn och man kan bara observera spelet.
+
     opponent = gets.chomp.to_s.downcase
     while opponent != "d" && opponent != "s"
         god(opponent)
