@@ -95,6 +95,7 @@ def game()
 end
 
 
+
 def pvp(sticks, heaps, name_1, name_2, starting_player)
     while heaps > 0
         system("cls")
@@ -110,6 +111,7 @@ def pvp(sticks, heaps, name_1, name_2, starting_player)
             puts "#{sticks}"
             heap_to_remove = gets.chomp.to_i
         end
+        
         system("cls")
         puts "Det finns #{sticks[heap_to_remove - 1]}st pinnar i högen"
         puts "Hur många pinnar vill du ta bort ur högen? (1-#{min(sticks[heap_to_remove - 1], 3)})"
@@ -149,6 +151,7 @@ def pvp(sticks, heaps, name_1, name_2, starting_player)
         end
     end
 end
+
 
 
 def pve(sticks, heaps, name_1, name_2, starting_player)
@@ -215,6 +218,7 @@ def pve(sticks, heaps, name_1, name_2, starting_player)
     end
 end
 
+
 # Beskrivning: Funktionen pro_computer är avsedd att hjälpa datorn att fatta beslut under spelet Nim. Genom att loopa genom högarna av tändstickor bestämmer funktionen vilken hög som är bäst att ta från baserat på en otroligt komplex och utvecklad strategi. Datorn väljer sedan antalet tändstickor att ta från den valda högen med hänsyn till olika villkor, såsom att minimera motståndarens möjligheter. Slutligen returnerar funktionen en array som innehåller den valda högen och antalet tändstickor som tas bort. På detta sätt kan datorn effektivt delta i spelet och försöka optimera sina chanser att vinna mot en mänsklig spelare.
 # Argument 1: Array - arrayen består av tal som representerar antalet pinnar i varje hög
 # Return: Array - arrayen består av två element, där första är vilken hög som datorn ska välja från och det andra elementet representerar hur många pinnar som ska tas bort från den högen
@@ -229,6 +233,7 @@ end
 # p pro_computer(["wad"]) # => Krash - går inte att köra funktionen med en array som består av strängar
 # Av: Max Svensby, Noah Saastad Bäckstrand
 # Datum: 2024-05-08
+
 
 def pro_computer(sticks)
     i = 0
@@ -251,6 +256,8 @@ def pro_computer(sticks)
     return (heap_to_remove + 1), sticks_to_remove
 end
 
+
+
 def min(n1, n2)
     if n1 < n2
         return n1
@@ -258,6 +265,8 @@ def min(n1, n2)
         return n2
     end
 end
+
+
 
 def god(answer)
     if answer.downcase == "god" || answer.downcase == "gud" || answer.downcase == "g"
@@ -268,5 +277,7 @@ def god(answer)
         exit
     end
 end
+
+
 
 game()
